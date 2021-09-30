@@ -66,9 +66,11 @@ function Graphics( weather ) {
         document.getElementById('weather').style.backgroundColor = 'rgb(235, 235, 235)'
         document.getElementById('innerweather').style.backgroundColor = 'rgb(189, 189, 189)'
 
-        for( let i=0;i<30/mobile;i++ ) {
-          let rand = Math.random() + 0.5;
-          makeCloud( rand, 99, 99, 99, 1 )
+        if( mobile === 1 ) {
+          for( let i=0;i<30/mobile;i++ ) {
+            let rand = Math.random() + 0.5;
+            makeCloud( rand, 99, 99, 99, 1 )
+          }
         }
         for( let i=0;i<25/mobile;i++ ) {
           let rand = 1 + Math.random()/2
@@ -86,13 +88,15 @@ function Graphics( weather ) {
 
         document.getElementById('bottombackground').style.clipPath = "polygon(62% 50%, 79% 46%, 100% 38%, 100% 100%, 0 100%, 0 46%, 18% 49%, 36% 41%, 49% 44%)"
 
+        if( mobile === 1 ) {
+          for( let i=0;i<30/mobile;i++ ) {
+            let rand = Math.random() + 0.5;
+            makeCloud( rand, 99, 99, 99, 1 )
+          }
+        }
         for( let i=0;i<25/mobile;i++ ) {
             let rand = 0.75 + Math.random()/3
             makeDroplet( rand, 100, 148, 237 )
-        }
-        for( let i=0;i<30/mobile;i++ ) {
-            let rand = Math.random() + 0.5;
-            makeCloud( rand, 99, 99, 99, 1 )
         }
         break;
       case 'Clouds':
