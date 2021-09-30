@@ -52,7 +52,7 @@ function Graphics( weather ) {
     Array.from(innerparticles).forEach( target => { document.body.removeChild( target ) } )
 
     if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-      var mobile = 3;
+      var mobile = 5;
     }
     else{
       mobile = 1;
