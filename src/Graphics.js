@@ -50,6 +50,13 @@ function Graphics( weather ) {
 
     var innerparticles = document.getElementsByClassName('innerparticle');
     Array.from(innerparticles).forEach( target => { document.body.removeChild( target ) } )
+
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+      var mobile = 3;
+    }
+    else{
+      mobile = 1;
+    }
   
     switch( weather ) {
       case 'Snow' :
@@ -79,11 +86,11 @@ function Graphics( weather ) {
 
         document.getElementById('bottombackground').style.clipPath = "polygon(62% 50%, 79% 46%, 100% 38%, 100% 100%, 0 100%, 0 46%, 18% 49%, 36% 41%, 49% 44%)"
 
-        for( let i=0;i<25;i++ ) {
+        for( let i=0;i<25/mobile;i++ ) {
             let rand = 0.75 + Math.random()/3
             makeDroplet( rand, 100, 148, 237 )
         }
-        for( let i=0;i<30;i++ ) {
+        for( let i=0;i<30/mobile;i++ ) {
             let rand = Math.random() + 0.5;
             makeCloud( rand, 99, 99, 99, 1 )
         }
@@ -97,7 +104,7 @@ function Graphics( weather ) {
 
         document.getElementById('bottombackground').style.clipPath = "polygon(62% 50%, 79% 46%, 100% 38%, 100% 100%, 0 100%, 0 46%, 18% 49%, 36% 41%, 49% 44%)"
 
-        for( let i=0;i<50;i++ ) {
+        for( let i=0;i<50/mobile;i++ ) {
             let rand = Math.random() + 0.5;
             makeCloud( rand, 159, 159, 159, 1 )
         }
@@ -113,7 +120,7 @@ function Graphics( weather ) {
 
         document.getElementById('bottombackground').style.clipPath = "polygon(69% 70%, 83% 65%, 100% 64%, 100% 100%, 0 100%, 0 75%, 15% 70%, 31% 73%, 48% 70%)"
         
-        for( let i=0;i<30;i++ ) {
+        for( let i=0;i<30/mobile;i++ ) {
           let rand = Math.random() * 2 + 0.5;
           makeCloud( rand , 159, 159, 159, 4 )
         }
@@ -127,7 +134,7 @@ function Graphics( weather ) {
 
         document.getElementById('bottombackground').style.clipPath = "polygon(69% 70%, 83% 65%, 100% 64%, 100% 100%, 0 100%, 0 75%, 15% 70%, 31% 73%, 48% 70%)"
 
-        for( let i=0;i<30;i++ ) {
+        for( let i=0;i<30/mobile;i++ ) {
           let rand = Math.random() * 2 + 0.5;
           makeCloud( rand , 235, 235, 235, 6 )
         }
@@ -143,7 +150,7 @@ function Graphics( weather ) {
 
         document.getElementById('bottombackground').style.clipPath = "polygon(69% 70%, 83% 65%, 100% 64%, 100% 100%, 0 100%, 0 75%, 15% 70%, 31% 73%, 48% 70%)"
 
-        for( let i=0;i<30;i++ ) {
+        for( let i=0;i<30/mobile;i++ ) {
           let rand = Math.random() * 2 + 0.5;
           makeCloud( rand , 225, 205, 175, 4 )
         }
@@ -157,7 +164,7 @@ function Graphics( weather ) {
 
         document.getElementById('bottombackground').style.clipPath = "polygon(62% 50%, 79% 46%, 100% 38%, 100% 100%, 0 100%, 0 46%, 18% 49%, 36% 41%, 49% 44%)"
 
-        for( let i=0;i<10;i++ ) {
+        for( let i=0;i<10/mobile;i++ ) {
             let rand = Math.random() + 0.2;
             makeCloud( rand , 235, 235, 235, 1 )
         }
