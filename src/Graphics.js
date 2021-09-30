@@ -66,11 +66,11 @@ function Graphics( weather ) {
         document.getElementById('weather').style.backgroundColor = 'rgb(235, 235, 235)'
         document.getElementById('innerweather').style.backgroundColor = 'rgb(189, 189, 189)'
 
-        for( let i=0;i<30;i++ ) {
+        for( let i=0;i<30/mobile;i++ ) {
           let rand = Math.random() + 0.5;
           makeCloud( rand, 99, 99, 99, 1 )
         }
-        for( let i=0;i<25;i++ ) {
+        for( let i=0;i<25/mobile;i++ ) {
           let rand = 1 + Math.random()/2
           makeDroplet( rand , 235, 235, 235 )
         }
