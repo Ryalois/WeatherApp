@@ -92,6 +92,8 @@
   box-sizing: border-box;
   box-shadow: none;
   outline: none;
+
+  cursor: pointer;
 }
 
 #weather {

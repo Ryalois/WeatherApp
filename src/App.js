@@ -28,7 +28,7 @@ function Day(props) {
     return(
       <div id="weather">
         <div id="innerweather">
-          <p id="temperature"> {props.weather} </p>
+          <p id="temperature">This city<br/>doesn't exist</p>
         </div>
       </div>
     );
