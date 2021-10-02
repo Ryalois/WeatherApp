@@ -12,7 +12,7 @@ async function checkweatherincity(cityName) {
         humidity: 404,
         temp: 404
       },
-      weather: [ { main: 'Error city does not exist' } ]
+      weather: [ { main: 'City does not exist' } ]
     }
     return data;
   }
@@ -23,6 +23,17 @@ async function checkweatherincity(cityName) {
 }
 
 function Day(props) {
+
+  if( props.humidity === 404 ) {
+    return(
+      <div id="weather">
+        <div id="innerweather">
+          <p id="temperature"> {props.weather} </p>
+        </div>
+      </div>
+    );
+  }
+
   if( props.tempunit === "Celsius" )
     var temp = Math.round(props.temp-273.15).toString()+"°C";
   if( props.tempunit === "Fahrenheit" )
