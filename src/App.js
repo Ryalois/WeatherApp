@@ -12,7 +12,7 @@ async function checkweatherincity(cityName) {
         humidity: 404,
         temp: 404
       },
-      weather: [ { main: 'City does not exist' } ]
+      weather: [ { main: 'City doesn\'t exist' } ]
     }
     return data;
   }
