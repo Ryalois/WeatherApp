@@ -48,7 +48,7 @@
   height: 1.2em;
   
   width: 20vw;
-  min-width: 120px;
+  min-width: 200px;
   font-size: inherit;
   color: rgb(0, 0, 0);
 
@@ -74,7 +74,7 @@
   height: 1.2em;
   
   width: 10vw;
-  min-width: 60px;
+  min-width: 90px;
   font-size: inherit;
   color: rgb(0, 0, 0);
 
@@ -88,6 +88,7 @@
   padding-left: 0.5em;
 
   border: none;
+  box-shadow: none;
 
   box-sizing: border-box;
   box-shadow: none;
@@ -121,6 +122,7 @@
   width: 80%;
   height: 80%;
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  font-size: calc(6px + 3vmin);
 }
 
 #temperature {
