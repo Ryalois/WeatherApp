@@ -22,6 +22,28 @@ async function checkweatherincity(cityName) {
   }
 }
 
+async function checkweatherincoords( lon, lat ) {
+  const key = '7f3acbb06dc37fbe907967270e2dabc9';
+  const response = await fetch( 'http://api.openweathermap.org/geo/1.0/reverse?lat=' + lat + '&lon=' + lon + '&limit=1&appid=' + key )
+  if( response.ok === false )
+  {
+    const data = {
+      main: {
+        humidity: 404,
+        temp: 404
+      },
+      weather: [ { main: 'City doesn\'t exist' } ]
+    }
+    return data;
+  }
+  else {
+    const city = await response.json();
+    const data = await checkweatherincity( city[0].name );
+    console.log(city,data)
+    return data;
+  }
+}
+
 function Day(props) {
 
   if( props.humidity === 404 ) {
@@ -54,7 +76,13 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { value: 'London', humidity: 0, temp: 0, tempunit: "Celsius", weather: '' };
+    this.state = {
+      value: 'London',
+      humidity: 0,
+      temp: 0,
+      tempunit: "Celsius",
+      weather: ''
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.onChangeValue = this.onChangeValue.bind(this);
@@ -62,10 +90,23 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    checkweatherincity(this.state.value).then( data => { 
-      this.setState({temp: data.main.temp, humidity: data.main.humidity, weather: data.weather[0].main});
-      Graphics( this.state.weather )
-    } );
+
+    if( navigator.geolocation )
+      {
+        navigator.geolocation.getCurrentPosition( positon => {
+          checkweatherincoords( positon.coords.longitude, positon.coords.latitude ).then( data => { 
+            this.setState({value: data.name, temp: data.main.temp, humidity: data.main.humidity, weather: data.weather[0].main});
+            Graphics( this.state.weather )
+          } );
+        } );
+      }
+    else
+      {
+        checkweatherincity(this.state.value).then( data => { 
+          this.setState({temp: data.main.temp, humidity: data.main.humidity, weather: data.weather[0].main});
+          Graphics( this.state.weather )
+        } );
+      }
   }
 
   handleChange(event) {
@@ -77,10 +118,12 @@ class App extends React.Component {
   }
 
   handleSubmit(event) {
-    checkweatherincity(this.state.value).then( data => { 
-      this.setState({temp: data.main.temp, humidity: data.main.humidity, weather: data.weather[0].main});
-      Graphics( this.state.weather )
-    } );
+    if( this.state.value !== "" ) {
+      checkweatherincity(this.state.value).then( data => {
+        this.setState({temp: data.main.temp, humidity: data.main.humidity, weather: data.weather[0].main});
+        Graphics( this.state.weather )
+      } );
+    }
     event.preventDefault();
   }
   
