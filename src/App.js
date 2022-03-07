@@ -87,26 +87,31 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.onChangeValue = this.onChangeValue.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.weatherCurrentLocation = this.weatherCurrentLocation.bind(this);
   }
 
   componentDidMount() {
-
+    this.weatherCurrentLocation()
+  }
+  
+  weatherCurrentLocation() {
+    
     if( navigator.geolocation )
-      {
-        navigator.geolocation.getCurrentPosition( positon => {
-          checkweatherincoords( positon.coords.longitude, positon.coords.latitude ).then( data => { 
-            this.setState({value: data.name, temp: data.main.temp, humidity: data.main.humidity, weather: data.weather[0].main});
-            Graphics( this.state.weather )
-          } );
-        } );
-      }
-    else
-      {
-        checkweatherincity(this.state.value).then( data => { 
-          this.setState({temp: data.main.temp, humidity: data.main.humidity, weather: data.weather[0].main});
+    {
+      navigator.geolocation.getCurrentPosition( positon => {
+        checkweatherincoords( positon.coords.longitude, positon.coords.latitude ).then( data => { 
+          this.setState({value: data.name, temp: data.main.temp, humidity: data.main.humidity, weather: data.weather[0].main});
           Graphics( this.state.weather )
         } );
-      }
+      } );
+    }
+    else
+    {
+      checkweatherincity(this.state.value).then( data => { 
+        this.setState({temp: data.main.temp, humidity: data.main.humidity, weather: data.weather[0].main});
+        Graphics( this.state.weather )
+      } );
+    }
   }
 
   handleChange(event) {
@@ -130,6 +135,9 @@ class App extends React.Component {
   render() {
   return (
       <div className="App" id="App">
+
+        <div id="nav">
+          <button disabled = { ( navigator.geolocation === true ) ? true : false } onClick={this.weatherCurrentLocation}>  </button>
           <form id="input" onSubmit={this.handleSubmit}>
             <input type="text" id="textinput" placeholder="City Name" value={this.state.value} onChange={this.handleChange} />
             <select id="tempform" name="tempunit" onChange={this.onChangeValue} >
@@ -138,8 +146,11 @@ class App extends React.Component {
               <option value="Kelvin">°K</option>
             </select>
           </form>
+        </div>
+
         <div id = 'bottombackground' />
         <Day temp={this.state.temp} humidity={this.state.humidity} weather={this.state.weather} tempunit={this.state.tempunit} />
+
       </div>
     );
   }

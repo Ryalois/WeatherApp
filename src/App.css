@@ -27,19 +27,58 @@
   height: 100%;
 }
 
-#input {
+#nav {
+  clip-path: polygon( calc( 0% + 1em ) 0, calc( 100% - 1em ) 0, 100% 50%, calc( 100% - 1em ) 100%, calc( 0% + 1em ) 100%, 0% 50%);
+  font-size: calc( 8px + 1.5vmax );
+  background-color: black;
 
   margin-top: 1vmin;
+  z-index: 10;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  width: 5vw;
+  min-width: 45px;
+  height: 1.2em;
+
+  clip-path: polygon( calc( 0% + 0.55em ) 0, calc( 100% - 0.55em ) 0, 100% 50%, calc( 100% - 0.55em ) 100%, calc( 0% + 0.55em ) 100%, 0% 50%);
+  background-color: rgb(235, 235, 235);
+
+  font-size: calc( 8px + 1.5vmax );
+
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0.5em;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-right: 0.05em;
+  padding-left: 0.5em;
+
+  border: none;
+
+  box-sizing: border-box;
+  box-shadow: none;
+  outline: none;
+
+  cursor: pointer;
+
+}
+
+#input {
   clip-path: polygon( calc( 0% + 1em ) 0, calc( 100% - 1em ) 0, 100% 50%, calc( 100% - 1em ) 100%, calc( 0% + 1em ) 100%, 0% 50%);
   font-size: calc( 8px + 1.5vmax );
   background-color: black;
   padding: 0.5em;
+  padding-left: 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  z-index: 10;
 }
 
 #textinput {
@@ -141,11 +180,12 @@
   position: fixed;
   clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);
 
+  transform: translateZ(0);
+
   animation-name: cloud;
   animation-duration: var(--duration);
   animation-iteration-count: infinite;
   animation-timing-function: linear;
-  transform-origin: center;
 
   cursor: pointer;
 
@@ -160,11 +200,12 @@
   position: fixed;
   clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);
 
+  transform: translateZ(0);
+
   animation-name: cloud;
   animation-duration: var(--duration);
   animation-iteration-count: infinite;
   animation-timing-function: linear;
-  transform-origin: center;
 
   cursor: pointer;
 
@@ -174,6 +215,8 @@
 .droplet {
   position: fixed;
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+
+  transform: translateZ(0);
 
   animation-name: rain;
   animation-duration: var(--duration);
@@ -193,6 +236,8 @@
   height: calc( 2.5vmin * var(--scale));
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
   background-color: white;
+
+  transform: translateZ(0);
 
   animation-name: puff;
   animation-duration: 2s;
