@@ -8,7 +8,7 @@ function mouseHover( event, id, r, g, b ) {
   var dirX = (event.offsetX - event.target.clientWidth/2) * 1/event.target.clientWidth;
   var dirY = (event.offsetY - event.target.clientHeight/2) * 1/event.target.clientHeight;
 
-  for( let i=0; i<1+Math.random()*3; i++ ) {
+  for( let i=0; i<2; i++ ) {
     let puff = document.createElement('div')
       puff.className = 'puff'
       puff.style.backgroundColor = 'rgb('+r+','+g+','+b+')'
@@ -32,7 +32,10 @@ function cloudDispurse( event, id, r, g, b ) {
   var posX = event.clientX;
   var posY = event.clientY;
 
-  for( let i=0; i<3+Math.random()*5; i++ ) {
+  let mobile = 1
+  if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) mobile = 3;
+
+  for( let i=0; i<3+Math.random()*5 - mobile; i++ ) {
     let puff = document.createElement('div')
       puff.className = 'puff'
       puff.style.backgroundColor = 'rgb('+r+','+g+','+b+')'
@@ -66,7 +69,7 @@ function makeCloud( scale, r, g, b, x, y, id ) {
       function rescale() {
         if( currentScale <= 0.3 ) {
           cloudDispurse( event, id, r, g, b )
-          setTimeout( makeCloud( scale, r, g, b, 0, y, id ), 1000 + Math.random() * 10000 )
+          setTimeout( makeCloud( scale, r, g, b, 0, y, id ), 10000 )
         }
         else if( currentScale > scaleOld - 0.01 ) {
           setTimeout( () => {

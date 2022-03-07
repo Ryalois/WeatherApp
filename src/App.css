@@ -201,6 +201,8 @@ button {
   clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);
 
   transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000;
 
   animation-name: cloud;
   animation-duration: var(--duration);
@@ -217,6 +219,8 @@ button {
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
 
   transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000;
 
   animation-name: rain;
   animation-duration: var(--duration);
@@ -238,6 +242,8 @@ button {
   background-color: white;
 
   transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000;
 
   animation-name: puff;
   animation-duration: 2s;
@@ -249,17 +255,17 @@ button {
 
 @keyframes rain {
   from {
-    transform: translateX( var(--x) ) translateY( -100vh );
+    transform: translate3d( var(--x), -100vh, 0 );
   }
 
   to {
-    transform: translateX( calc( var(--x) + 20vw ) ) translateY( 10vh );
+    transform: translate3d( calc( var(--x) + 20vw ) ) translateY( 10vh );
   }
 }
 
 @keyframes cloud {
   from {
-    transform: translateX( calc( var(--x) - 20vw ) ) translateY( var(--y) );
+    transform: translate3d( calc( var(--x) - 20vw ), var(--y), 0 );
   }
 
   to {
@@ -271,6 +277,8 @@ button {
   from {
     left: var(--x);
     top: var(--y);
+
+    transform: translateZ(0);
 
     width: calc( 6vmin * var(--scale) );
     height: calc( 5vmin * var(--scale) );
