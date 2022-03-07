@@ -24,7 +24,7 @@ async function checkweatherincity(cityName) {
 
 async function checkweatherincoords( lon, lat ) {
   const key = '7f3acbb06dc37fbe907967270e2dabc9';
-  const response = await fetch( 'http://api.openweathermap.org/geo/1.0/reverse?lat=' + lat + '&lon=' + lon + '&limit=1&appid=' + key )
+  const response = await fetch( 'https://api.openweathermap.org/geo/1.0/reverse?lat=' + lat + '&lon=' + lon + '&limit=1&appid=' + key )
   if( response.ok === false )
   {
     const data = {
