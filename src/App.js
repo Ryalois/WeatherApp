@@ -39,7 +39,6 @@ async function checkweatherincoords( lon, lat ) {
   else {
     const city = await response.json();
     const data = await checkweatherincity( city[0].name );
-    console.log(city,data)
     return data;
   }
 }
@@ -78,6 +77,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       value: 'London',
+      previous: [],
       humidity: 0,
       temp: 0,
       tempunit: "Celsius",
@@ -88,30 +88,49 @@ class App extends React.Component {
     this.onChangeValue = this.onChangeValue.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.weatherCurrentLocation = this.weatherCurrentLocation.bind(this);
+    this.previousLocation = this.previousLocation.bind(this);
   }
 
   componentDidMount() {
+    checkweatherincity(this.state.value).then( data => { 
+      this.setState({temp: data.main.temp, humidity: data.main.humidity, weather: data.weather[0].main});
+      Graphics( this.state.weather )
+    } );
     this.weatherCurrentLocation()
   }
   
   weatherCurrentLocation() {
-    
+
     if( navigator.geolocation )
     {
       navigator.geolocation.getCurrentPosition( positon => {
         checkweatherincoords( positon.coords.longitude, positon.coords.latitude ).then( data => { 
           this.setState({value: data.name, temp: data.main.temp, humidity: data.main.humidity, weather: data.weather[0].main});
           Graphics( this.state.weather )
+          if( this.state.weather !== "City doesn't exist" )
+          {
+            if( this.state.previous[ this.state.previous.length-1 ] !== this.state.value )
+              this.state.previous.push( this.state.value )
+          }
         } );
       } );
     }
-    else
-    {
-      checkweatherincity(this.state.value).then( data => { 
-        this.setState({temp: data.main.temp, humidity: data.main.humidity, weather: data.weather[0].main});
-        Graphics( this.state.weather )
-      } );
-    }
+  }
+
+  previousLocation() {
+
+    if( this.state.previous.length === 0 ) return
+
+    let city = this.state.previous.pop()
+
+    this.setState( { value: city } )
+
+    console.log( city, this.state.previous )
+
+    checkweatherincity( city ).then( data => { 
+      this.setState({temp: data.main.temp, humidity: data.main.humidity, weather: data.weather[0].main});
+      Graphics( this.state.weather )
+    } );
   }
 
   handleChange(event) {
@@ -127,6 +146,11 @@ class App extends React.Component {
       checkweatherincity(this.state.value).then( data => {
         this.setState({temp: data.main.temp, humidity: data.main.humidity, weather: data.weather[0].main});
         Graphics( this.state.weather )
+        if( this.state.weather !== "City doesn't exist" )
+        {
+          if( this.state.previous[ this.state.previous.length-1 ] !== this.state.value )
+          this.state.previous.push( this.state.value )
+        }
       } );
     }
     event.preventDefault();
@@ -137,7 +161,8 @@ class App extends React.Component {
       <div className="App" id="App">
 
         <div id="nav">
-          <button disabled = { ( navigator.geolocation === true ) ? true : false } onClick={this.weatherCurrentLocation}>  </button>
+          <button id="location" onClick={this.weatherCurrentLocation} disabled = { ( navigator.geolocation === true ) ? true : false }>  </button>
+          <button id="previous" onClick={this.previousLocation}> </button>
           <form id="input" onSubmit={this.handleSubmit}>
             <input type="text" id="textinput" placeholder="City Name" value={this.state.value} onChange={this.handleChange} />
             <select id="tempform" name="tempunit" onChange={this.onChangeValue} >

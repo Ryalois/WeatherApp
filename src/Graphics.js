@@ -19,15 +19,15 @@ function mouseHover( event, id, r, g, b ) {
 
       puff.style.setProperty( '--nx', (posX/window.innerWidth*100 + ( -0.25 + Math.random() + dirX ) * 15 ) + 'vw' )
       puff.style.setProperty( '--ny', (posY/window.innerHeight*100 + ( -0.25 + Math.random()/2 + dirY ) * 15 ) + 'vh' )
-    document.body.appendChild(puff)
-    setTimeout( () => { document.body.removeChild( puff ) }, 500 + Math.random() * 1500 )
+    document.getElementById("App").appendChild(puff)
+    setTimeout( () => { document.getElementById("App").removeChild( puff ) }, 500 + Math.random() * 1500 )
   }
 }
 
 function cloudDispurse( event, id, r, g, b ) {
 
   var particles = document.getElementsByClassName( id );
-  Array.from(particles).forEach( target => { document.body.removeChild( target ) } )
+  Array.from(particles).forEach( target => { document.getElementById("App").removeChild( target ) } )
 
   var posX = event.clientX;
   var posY = event.clientY;
@@ -46,8 +46,8 @@ function cloudDispurse( event, id, r, g, b ) {
 
       puff.style.setProperty( '--nx', (posX/window.innerWidth*100 + ( -0.5 + Math.random() * 2 ) * 5 ) + 'vw' )
       puff.style.setProperty( '--ny', (posY/window.innerHeight*100 + ( -0.5 + Math.random() ) * 5 ) + 'vh' )
-    document.body.appendChild(puff)
-    setTimeout( () => { document.body.removeChild( puff ) }, 500 + Math.random() * 1500 )
+    document.getElementById("App").appendChild(puff)
+    setTimeout( () => { document.getElementById("App").removeChild( puff ) }, 500 + Math.random() * 1500 )
   }
 }
 
@@ -74,10 +74,10 @@ function makeCloud( scale, r, g, b, x, y, id ) {
         else if( currentScale > scaleOld - 0.01 ) {
           setTimeout( () => {
             currentScale -= 0.001
-            particle.style.width = currentScale * 24 + 'vmin'
-            particle.style.height = currentScale * 20 + 'vmin'
-            innerparticle.style.width = currentScale * 24 - 4 + 'vmin'
-            innerparticle.style.height = currentScale * 20 - 4 + 'vmin'
+            particle.style.width = currentScale * 24 + 'vmax'
+            particle.style.height = currentScale * 20 + 'vmax'
+            innerparticle.style.width = currentScale * 24 - 2 + 'vmax'
+            innerparticle.style.height = currentScale * 20 - 2 + 'vmax'
             rescale()
           }, 10 )
         }
@@ -98,10 +98,10 @@ function makeCloud( scale, r, g, b, x, y, id ) {
         else if( currentScale > scaleOld - 0.01 ) {
           setTimeout( () => {
             currentScale -= 0.001
-            particle.style.width = currentScale * 24 + 'vmin'
-            particle.style.height = currentScale * 20 + 'vmin'
-            innerparticle.style.width = currentScale * 24 - 4 + 'vmin'
-            innerparticle.style.height = currentScale * 20 - 4 + 'vmin'
+            particle.style.width = currentScale * 24 + 'vmax'
+            particle.style.height = currentScale * 20 + 'vmax'
+            innerparticle.style.width = currentScale * 24 - 2 + 'vmax'
+            innerparticle.style.height = currentScale * 20 - 2 + 'vmax'
             rescale()
           }, 10 )
         }
@@ -116,12 +116,12 @@ function makeCloud( scale, r, g, b, x, y, id ) {
     }
     
     particle.style.backgroundColor = 'rgb('+r+','+g+','+b+')'
-    particle.style.width = scale * 24 + 'vmin'
-    particle.style.height = scale * 20 + 'vmin'
-    particle.style.setProperty( '--y' , -y + 'vh' )
+    particle.style.width = scale * 24 + 'vmax'
+    particle.style.height = scale * 20 + 'vmax'
+    particle.style.setProperty( '--y' , (y - 10) + 'vh' )
     particle.style.setProperty( '--duration' , randdur + 's' )
     particle.style.animationDelay = delay + 's'
-  document.body.appendChild(particle);
+  document.getElementById("App").appendChild(particle);
 
   let innerparticle = document.createElement('div');
 
@@ -139,17 +139,16 @@ function makeCloud( scale, r, g, b, x, y, id ) {
         else if( currentScale > scaleOld - 0.01 ) {
           setTimeout( () => {
             currentScale -= 0.001
-            particle.style.width = currentScale * 24 + 'vmin'
-            particle.style.height = currentScale * 20 + 'vmin'
-            innerparticle.style.width = currentScale * 24 - 4 + 'vmin'
-            innerparticle.style.height = currentScale * 20 - 4 + 'vmin'
+            particle.style.width = currentScale * 24 + 'vmax'
+            particle.style.height = currentScale * 20 + 'vmax'
+            innerparticle.style.width = currentScale * 24 - 2 + 'vmax'
+            innerparticle.style.height = currentScale * 20 - 2 + 'vmax'
             rescale()
           }, 10 )
         }
       }
       
       rescale()
-      mouseHover( event, id, r, g, b )
     }
     innerparticle.onmouseleave = event => {
 
@@ -163,31 +162,29 @@ function makeCloud( scale, r, g, b, x, y, id ) {
         else if( currentScale > scaleOld - 0.01 ) {
           setTimeout( () => {
             currentScale -= 0.001
-            particle.style.width = currentScale * 24 + 'vmin'
-            particle.style.height = currentScale * 20 + 'vmin'
-            innerparticle.style.width = currentScale * 24 - 4 + 'vmin'
-            innerparticle.style.height = currentScale * 20 - 4 + 'vmin'
+            particle.style.width = currentScale * 24 + 'vmax'
+            particle.style.height = currentScale * 20 + 'vmax'
+            innerparticle.style.width = currentScale * 24 - 2 + 'vmax'
+            innerparticle.style.height = currentScale * 20 - 2 + 'vmax'
             rescale()
           }, 10 )
         }
       }
       
       rescale()
-      mouseHover( event, id, r, g, b )
     }
     innerparticle.onclick = event => {
       cloudDispurse( event, id, r, g, b )
       setTimeout( makeCloud( scale, r, g, b, 0, y, id ), 1000 + Math.random() * 10000 )
     }
 
-    innerparticle.style.width = scale * 24 - 4 + 'vmin'
-    innerparticle.style.height = scale * 20 - 4 + 'vmin'
+    innerparticle.style.width = scale * 24 - 2 + 'vmax'
+    innerparticle.style.height = scale * 20 - 2 + 'vmax'
     innerparticle.style.backgroundColor = 'rgb(' + (r-20) + ',' + (g-20) + ',' + (b-20) + ')'
-    innerparticle.style.setProperty( '--y' , 'calc(' + -y + 'vh + 2vmin)' )
-    innerparticle.style.setProperty( '--x' , '2vmin')
+    innerparticle.style.setProperty( '--y' , 'calc(' + (y - 10) + 'vh + 1vmax)' )
     innerparticle.style.setProperty( '--duration' , randdur + 's' )
     innerparticle.style.animationDelay = delay + 's'
-  document.body.appendChild( innerparticle );
+  document.getElementById("App").appendChild( innerparticle );
 }
   
 function makeDroplet( scale, r, g, b ) {
@@ -199,19 +196,19 @@ function makeDroplet( scale, r, g, b ) {
     particle.style.animationDelay = -Math.random() * 2 + 's'
     particle.style.setProperty( '--x' , Math.random() * 120 - 20 + 'vw' )
     particle.style.setProperty( '--duration' , ( Math.random() + 2 ) * scale + 's')
-  document.body.appendChild(particle);
+  document.getElementById("App").appendChild(particle);
 }
 
 function Graphics( weather ) {
 
   var particles = document.getElementsByClassName('particle');
-  Array.from(particles).forEach( target => { document.body.removeChild( target ) } )
+  Array.from(particles).forEach( target => { document.getElementById("App").removeChild( target ) } )
 
   var innerparticles = document.getElementsByClassName('innerparticle');
-  Array.from(innerparticles).forEach( target => { document.body.removeChild( target ) } )
+  Array.from(innerparticles).forEach( target => { document.getElementById("App").removeChild( target ) } )
 
   var droplets = document.getElementsByClassName('droplet');
-  Array.from(droplets).forEach( target => { document.body.removeChild( target ) } )
+  Array.from(droplets).forEach( target => { document.getElementById("App").removeChild( target ) } )
 
   var mobile = 2;
   if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) mobile = 5;
@@ -295,7 +292,7 @@ function Graphics( weather ) {
       for( let i=0;i<40/mobile;i++ ) {
         let rand = Math.random() * 2 + 0.5 * mobile/2;
         let x = Math.random() * 100
-        let y = Math.random() * 50 - ( mobile - 2 ) * 5
+        let y =  50 + Math.random() * 50 - ( mobile - 2 ) * 5
         makeCloud( rand , 159, 159, 159, x, y, i )
       }
     break;
@@ -312,7 +309,7 @@ function Graphics( weather ) {
       for( let i=0;i<40/mobile;i++ ) {
         let rand = Math.random() * 2 + 0.5 * mobile/2;
         let x = Math.random() * 100
-        let y = Math.random() * 40 - ( mobile - 2 ) * 5
+        let y = 60 + Math.random() * 40 - ( mobile - 2 ) * 5
         makeCloud( rand , 235, 235, 235, x, y, i )
       }
     break;
@@ -331,7 +328,7 @@ function Graphics( weather ) {
       for( let i=0;i<40/mobile;i++ ) {
         let rand = Math.random() * 2 + 0.5 * mobile/2;
         let x = Math.random() * 100
-        let y = Math.random() * 50 - ( mobile - 2 ) * 5
+        let y = 50 + Math.random() * 50 - ( mobile - 2 ) * 5
         makeCloud( rand , 225, 205, 175, x, y, i )
       }
     break;
