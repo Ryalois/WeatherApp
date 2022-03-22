@@ -119,13 +119,12 @@ class App extends React.Component {
 
   previousLocation() {
 
-    if( this.state.previous.length === 0 ) return
+    if( this.state.previous.length < 2 ) return
 
-    let city = this.state.previous.pop()
-
+    let city = this.state.previous[ this.state.previous.length - 2 ]
+    this.state.previous.pop()
+    
     this.setState( { value: city } )
-
-    console.log( city, this.state.previous )
 
     checkweatherincity( city ).then( data => { 
       this.setState({temp: data.main.temp, humidity: data.main.humidity, weather: data.weather[0].main});
