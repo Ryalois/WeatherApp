@@ -17,8 +17,8 @@ function mouseHover( event, id, r, g, b ) {
       puff.style.setProperty( '--x', (posX/window.innerWidth*100) + 'vw' )
       puff.style.setProperty( '--y', (posY/window.innerHeight*100) + 'vh' )
 
-      puff.style.setProperty( '--nx', (posX/window.innerWidth*100 + ( -0.25 + Math.random() + dirX ) * 15 ) + 'vw' )
-      puff.style.setProperty( '--ny', (posY/window.innerHeight*100 + ( -0.25 + Math.random()/2 + dirY ) * 15 ) + 'vh' )
+      puff.style.setProperty( '--nx', (posX/window.innerWidth*100 + ( -1 + Math.random()*2 + dirX ) * 10 ) + 'vw' )
+      puff.style.setProperty( '--ny', (posY/window.innerHeight*100 + ( -0.5 + Math.random() + dirY ) * 10 ) + 'vh' )
     document.getElementById("App").appendChild(puff)
     setTimeout( () => { document.getElementById("App").removeChild( puff ) }, 500 + Math.random() * 1500 )
   }
